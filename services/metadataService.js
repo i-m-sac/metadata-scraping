@@ -1,6 +1,6 @@
 let path = require('path'),
   apiService = require(path.resolve('./services/apiService')),
-  cheerio = require('cheerio');
+  CheerioService = require(path.resolve('./services/cheerioService'));
 
 
 class MetadataService {
@@ -22,7 +22,14 @@ class MetadataService {
 
   parseMetatags(html) {
     try {
-      let head = this.getHTMLHead(html);
+      let cheerioService = new CheerioService(html);
+      let title = cheerioService.getMetadataTitle();
+      let ogTags = {
+        title: cheerioService.getMetadataTitle(),
+        description: cheerioService.getMetadataDescription(),
+        images: cheerioService.getMetadataImage()
+      }
+      return ogTags;
       return head;
     } catch (err) {
       console.log('Error in parsing', err);
@@ -31,7 +38,7 @@ class MetadataService {
 
   getHTMLHead(html) {
     let $ = cheerio.load(html);
-    let response = $('meta[property="og:image"]').html();
+    let response = $("meta[property='og:title']").attr("content");
     return response;
   }
 
