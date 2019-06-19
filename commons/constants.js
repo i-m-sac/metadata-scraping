@@ -39,28 +39,28 @@ module.exports = {
     GATEWAY_TIMEOUT: 504,
     SUCCESS_NO_CONTENT: 204
   },
-  OG_TAG : {
-    BASE : "meta[property='@ogTag@']",
-    PARAMS : {
+  OG_TAG: {
+    BASE: "meta[property='@ogTag@']",
+    PARAMS: {
       title: {
-        key : 'og:title',
-        alt : 'title',
-        isAltText : true
+        key: 'og:title',
+        alt: 'title',
+        isAltText: true
       },
-      img : {
+      image: {
         key: 'og:image',
         alt: 'img'
       },
       description: {
-        key : 'og:description',
-        alt : "[name='description']"
+        key: 'og:description',
+        alt: "[name='description']"
       },
-      url : {
-        key : 'og:url',
-        alt : "[name='url']"
+      url: {
+        key: 'og:url',
+        alt: "[name='url']"
       },
       type: {
-        key : 'og:type'
+        key: 'og:type'
       }
     }
   }
