@@ -1,6 +1,8 @@
 let path = require('path'),
   apiService = require(path.resolve('./services/apiService')),
-  CheerioService = require(path.resolve('./services/cheerioService'));
+  CheerioService = require(path.resolve('./services/cheerioService')),
+  CacheService = require(path.resolve('./services/cacheService.js')),
+  cacheService = new CacheService();
 
 
 class MetadataService {
@@ -10,9 +12,14 @@ class MetadataService {
    */
   async getMetadata(url) {
     try {
+      let cacheResponse = cacheService.getMetadata(url);
+      if (cacheResponse) {
+        return cacheResponse;
+      }
       let html = await apiService.get(url);
       let parsedTags = this.parseMetatags(html);
       console.log(parsedTags);
+      cacheService.saveMetadata(url, parsedTags);
       return parsedTags;
     } catch (err) {
       console.log(err);
