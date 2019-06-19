@@ -1,69 +1,39 @@
-let cheerio = require('cheerio');
+let cheerio = require('cheerio'),
+  path = require('path'),
+  constants = require(path.resolve('./commons/constants'));
 
 class CheerioService {
   constructor(html) {
     this.$ = cheerio.load(html)
   }
-
-  getMetadataTitle() {
-    let title = this.getOGTitle();
-    if (!title) {
-      title = this.getTitle();
+  
+  getOGData(){
+    try{
+      let response = {};
+      for(let ogParam in constants.OG_TAG.PARAMS){
+        let query = constants.OG_TAG.BASE
+          .replace('@ogTag@', constants.OG_TAG.PARAMS[ogParam].key);
+        let data = this.$(query).attr("content");
+        if(!data && constants.OG_TAG.PARAMS[ogParam].alt){
+          query = constants.OG_TAG.PARAMS[ogParam].alt;
+          if(ogParam === 'img'){
+            data = this.$(query)
+            continue;
+          }
+          if(constants.OG_TAG.PARAMS[ogParam].isAltText){
+            data = this.$(query).text()
+          }
+          else {
+            data = this.$(query).attr("content")
+          }
+        }
+        response[ogParam] = data;
+      }
+      return response;
+    } catch(err){
+      console.log(err);
+      throw err;
     }
-    return title;
-  }
-
-  getTitle() {
-    return this.$("title").text()
-  }
-
-  getOGTitle() {
-    return this.$("meta[property='og:title']").attr("content");
-  }
-
-  getMetadataDescription() {
-    let description = this.getOGDescription();
-    if (!description) {
-      description = this.getDescription();
-    }
-    return description;
-  }
-
-  getDescription() {
-    return this.$("[name='description']").attr("content");
-  }
-
-  getOGDescription() {
-    return this.$("meta[property='og:description']").attr("content");
-  }
-
-  getMetadataImage() {
-    return this.$("meta[property='og:image']").attr("content");
-  }
-
-  getMetadataURL() {
-    let url = this.getOGURL();
-    if (!url) {
-      url = this.getURL();
-    }
-    return url;
-  }
-
-  getOGURL() {
-    return this.$("meta[property='og:url']").attr("content");
-  }
-
-  getURL() {
-    return this.$("[name='url']").attr("content");
-  }
-
-  getMetadataType() {
-    let type = this.getOGType();
-    return type;
-  }
-
-  getOGType() {
-    return this.$("meta[property='og:type']").attr("content");
   }
 
 }

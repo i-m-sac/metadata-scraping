@@ -38,5 +38,30 @@ module.exports = {
     NOT_FOUND: 404,
     GATEWAY_TIMEOUT: 504,
     SUCCESS_NO_CONTENT: 204
+  },
+  OG_TAG : {
+    BASE : "meta[property='@ogTag@']",
+    PARAMS : {
+      title: {
+        key : 'og:title',
+        alt : 'title',
+        isAltText : true
+      },
+      img : {
+        key: 'og:image',
+        alt: 'img'
+      },
+      description: {
+        key : 'og:description',
+        alt : "[name='description']"
+      },
+      url : {
+        key : 'og:url',
+        alt : "[name='url']"
+      },
+      type: {
+        key : 'og:type'
+      }
+    }
   }
 };

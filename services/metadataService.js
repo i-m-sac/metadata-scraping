@@ -20,17 +20,15 @@ class MetadataService {
     }
   }
 
+  /**
+   * Function to parse html to get metatags using parserService
+   * @param html {String}
+   * @return {Object}
+   */
   parseMetatags(html) {
     try {
       let cheerioService = new CheerioService(html);
-      let ogTags = {
-        title: cheerioService.getMetadataTitle(),
-        description: cheerioService.getMetadataDescription(),
-        url: cheerioService.getMetadataURL(),
-        type: cheerioService.getMetadataType(),
-        images: cheerioService.getMetadataImage()
-      }
-      return ogTags;
+      return cheerioService.getOGData();
     } catch (err) {
       console.log('Error in parsing', err);
     }
