@@ -1,5 +1,5 @@
 
-let path = require('path'),
+const path = require('path'),
   constants = require(path.resolve('./commons/constants'));
 
 

@@ -1,10 +1,11 @@
-let rp = require('request-promise');
+const rp = require('request-promise');
 
 class APIService {
 
   constructor() {
     this.headers = {
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36'
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36',
+      timeout : 120000
     }
   }
 
@@ -17,7 +18,8 @@ class APIService {
     try {
       let request = {
         uri: url,
-        headers: options.headers ? options.headers : this.headers
+        headers: options.headers ? options.headers : this.headers,
+        timeout: options.timeout ? options.timeout : this.timeout
       };
       return await rp(request);
     } catch (err) {

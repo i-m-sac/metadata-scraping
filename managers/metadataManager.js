@@ -1,4 +1,4 @@
-let path = require("path"),
+const path = require("path"),
   helper = require(path.resolve("./commons/helper")),
   metadataService = require(path.resolve("./services/metadataService"));
 

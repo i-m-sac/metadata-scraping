@@ -1,6 +1,6 @@
-let cheerio = require("cheerio"),
-  path = require("path"),
-  constants = require(path.resolve("./commons/constants"));
+const cheerio = require("cheerio"),
+  path = require("path");
+let constants = require(path.resolve("./commons/constants"));
 
 class CheerioService {
   constructor(html) {
