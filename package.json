@@ -13,6 +13,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "node-cache": "^4.2.0",
     "path": "^0.12.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
