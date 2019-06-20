@@ -16,14 +16,14 @@ class CheerioService {
           constants.OG_TAG.PARAMS[ogParam].key
         );
         let data;
-        if (ogParam === 'image') {
+        if (ogParam === 'images') {
           let imgSrc = this.$(query).attr("content");
           data = imgSrc ? [imgSrc] : null;
         } else
           data = this.$(query).attr("content");
         if (!data && constants.OG_TAG.PARAMS[ogParam].alt) {
           query = constants.OG_TAG.PARAMS[ogParam].alt;
-          if (ogParam === "image") {
+          if (ogParam === "images") {
             data = [];
             let imgs = this.$(query);
             this.$(query).each((i, node) => {
