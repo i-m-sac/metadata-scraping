@@ -22,7 +22,7 @@ module.exports = {
       SAVE: "Saved Successfully",
       UPDATE: "Updated Successfully",
       LOGOUT: "Logout Successfully",
-      DATA_POPUATED: "Data populated successfully",
+      DATA_POPULATED: "Data populated successfully",
       ADVICES_CREATE_MESSAGE: "Your message has been sent",
       ACTION_REVERSED: "Action reversed successfully"
     }

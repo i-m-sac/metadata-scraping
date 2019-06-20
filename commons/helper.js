@@ -3,67 +3,56 @@ let path = require('path'),
   constants = require(path.resolve('./commons/constants'));
 
 
-/**
- * create a common success response object for api requests
- * @param response {Object}
- * @param options {Object}
- * @return responseObject {Object}
- */
-async function createSuccessResponse(response, options) {
-  if (!options) {
-    options = {};
+class Helper{
+
+  /**
+   * create a common success response object for api requests
+   * @param response {Object}
+   * @param options {Object}
+   * @return responseObject {Object}
+   */
+  createSuccessResponse(response, options ={}) {
+    var responseObject = {
+      success: true,
+      status: options.status || constants.RESPONSE_STATUS.SUCCESS,
+      message: options.message || constants.MESSAGES.SUCCESS.DATA_POPULATED,
+      data: response
+    };
+    return responseObject;
   }
-  var responseObject = {
-    success: true,
-    status: options.status || constants.RESPONSE_STATUS.SUCCESS,
-    message: options.message || constants.MESSAGES.SUCCESS.DATA_POPULATED,
-    data: response
-  };
-  return responseObject;
-}
 
-/**
- * create a common error response object for api requests
- * @param error {Object}
- * @param options {Object}
- * @return responseObject {Object}
- */
-function createErrorResponse(error, options) {
-  var responseObject = {
-    success: false,
-    status: options.status,
-    error: error,
-    message: error.message
-  };
-  return responseObject;
-}
-
-/**
- * create a common error response object for api requests
- * @param config {Object}
- * @return responseObject {Object}
- */
-function createStructuredErrorResponse(config) {
-  config.status = config.status || 500;
-  var responseObject = {
-    success: false,
-    status: config.status,
-    error: config.error && config.error.message ? config.error.message : config.error, // error message
-    message: config.message // status message
-  };
-  if (config.status == constants.RESPONSE_STATUS.INTERNAL_SERVER_ERROR) {
-    responseObject.error = config.message;
-    responseObject.message = config.error && config.error.message ? config.error.message : config.error;
+  /**
+   * Create a common error response object for api requests
+   * @param config {Object}
+   * @return responseObject {Object}
+   */
+  createStructuredErrorResponse(config = {}) {
+    config.status = config.status || 500;
+    var responseObject = {
+      success: false,
+      status: config.status,
+      error: config.error && config.error.message ? config.error.message : config.error || config, // error message
+      message: config.message // status message
+    };
+    if (config.status == constants.RESPONSE_STATUS.INTERNAL_SERVER_ERROR) {
+      responseObject.error = config.message;
+      responseObject.message = config.error && config.error.message ? config.error.message : config.error;
+    }
+    return responseObject;
   }
-  // if (config.error && config.error.stack) {
-  //   log.error(config.error.stack)
-  // }
-  return responseObject;
+
+  /**
+   * Create internal server error object
+   * @param err {String}
+   * @return {Object}
+   */
+  getInternalServerErrorObj(err) {
+    return {
+      message: constants.MESSAGES.ERROR.INTERNAL_SERVER_ERROR,
+      status: constants.RESPONSE_STATUS.INTERNAL_SERVER_ERROR,
+      error: err
+    }
+  }
 }
 
-
-module.exports = {
-  createSuccessResponse: createSuccessResponse,
-  createErrorResponse: createErrorResponse,
-  createStructuredErrorResponse: createStructuredErrorResponse
-};
+module.exports = new Helper();
