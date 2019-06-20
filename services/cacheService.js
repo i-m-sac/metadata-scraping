@@ -19,4 +19,4 @@ class CacheService {
   }
 }
 
-module.export = CacheService;
+module.exports = CacheService;
