@@ -39,15 +39,17 @@ module.exports = {
     GATEWAY_TIMEOUT: 504,
     SUCCESS_NO_CONTENT: 204
   },
+  //For querying DOM to get ogTags
   OG_TAG: {
     BASE: "meta[property='@ogTag@']",
+    //Key names can be modified to changed the response structure
     PARAMS: {
       title: {
         key: 'og:title',
         alt: 'title',
         isAltText: true
       },
-      image: {
+      images: {
         key: 'og:image',
         alt: 'img'
       },
