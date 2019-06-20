@@ -1,9 +1,12 @@
 const rp = require('request-promise'),
   path = require('path'),
-  metadataService = (path.resolve('./services/metadataService'));
+  metadataService = require((path.resolve('./services/metadataService')));
 
 class TestAPIService {
 
+  /**
+   * Function to test if the service can start up without errors
+   */
   async healthCheck() {
     try {
       let response = await rp({
@@ -15,10 +18,16 @@ class TestAPIService {
     }
   }
 
+  /**
+   * Function to check if metadata scraping of og tags works fine
+   */
   async metadataTest() {
     try {
       let response = await metadataService
-        .getMetadata('https://horseandcountry.tv/app/details/new/Category27106/553%22%3E%3Cmeta');
+        .getMetadata("http://www.google.com");
+      // let response = await rp({
+      //   uri: 'https://horseandcsountry.tv/app/details/new/Category27106/553%22%3E%3Cmeta'
+      // });
       return response;
     } catch (err) {
       return err;

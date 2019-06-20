@@ -6,9 +6,14 @@ const path = require('path'),
   startup = require(path.resolve('./bin/www'));
 
 
-describe('isServerUp', () => {
-  console.log('In once');
-  it('should return OK Status', async function () {
+describe('Is server running check', () => {
+  it('should return OK Status', async () => {
     return testAPIService.healthCheck().should.eventually.be.true;
+  });
+});
+
+describe('Metadata scraping function check', () => {
+  it('should have property images', async () => {
+    return testAPIService.metadataTest().should.eventually.have.property('images').to.have.lengthOf(1);
   });
 });
