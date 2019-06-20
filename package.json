@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha ./tests/mainTest "
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
@@ -17,5 +18,10 @@
     "path": "^0.12.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.1.4"
   }
 }
