@@ -1,18 +1,20 @@
-let cheerio = require("cheerio"),
-  path = require("path"),
-  constants = require(path.resolve("./commons/constants"));
+const cheerio = require("cheerio"),
+  path = require("path");
+let constants = require(path.resolve("./commons/constants"));
 
 class CheerioService {
   constructor(html) {
-    this.$ = cheerio.load(html);
+    this.$ = cheerio.load(html);      //loading cheerio object for html
   }
 
   /**
-   *
+   *Function to parse html data and return metadata
+   * HTML is present in this.$
    */
   getOGData() {
     try {
       let response = {};
+      //looping through all ogTags
       for (let ogParam in constants.OG_TAG.PARAMS) {
         let query = constants.OG_TAG.BASE.replace(
           "@ogTag@",
@@ -21,14 +23,16 @@ class CheerioService {
         let data;
         if (ogParam === 'images') {
           let imgSrc = this.$(query).attr("content");
+          //making image an array
           data = imgSrc ? [imgSrc] : null;
         } else
           data = this.$(query).attr("content");
         if (!data && constants.OG_TAG.PARAMS[ogParam].alt) {
+          //checking for data in alternative tags in case og tags are absent
+          //alternative tags are defined in constants
           query = constants.OG_TAG.PARAMS[ogParam].alt;
           if (ogParam === "images") {
             data = [];
-            let imgs = this.$(query);
             this.$(query).each((i, node) => {
               let imgSrc = this.$(node).attr("src");
               if (imgSrc && imgSrc.includes('http')) {
@@ -48,7 +52,6 @@ class CheerioService {
       }
       return response;
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

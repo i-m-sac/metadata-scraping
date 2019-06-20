@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
-let path = require("path");
-let metadataManager = require(path.resolve("./managers/metadataManager"));
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const metadataManager = require(path.resolve("./managers/metadataManager"));
 
 
 router.post("/", async function (req, res, next) {
