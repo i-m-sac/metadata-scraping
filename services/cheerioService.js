@@ -7,6 +7,9 @@ class CheerioService {
     this.$ = cheerio.load(html);
   }
 
+  /**
+   *
+   */
   getOGData() {
     try {
       let response = {};

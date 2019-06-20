@@ -1,6 +1,4 @@
-/**
- * Created by jithu on 24-01-2017.
- */
+
 let path = require('path'),
   constants = require(path.resolve('./commons/constants'));
 
@@ -57,9 +55,9 @@ function createStructuredErrorResponse(config) {
     responseObject.error = config.message;
     responseObject.message = config.error && config.error.message ? config.error.message : config.error;
   }
-  if (config.error && config.error.stack) {
-    log.error(config.error.stack)
-  }
+  // if (config.error && config.error.stack) {
+  //   log.error(config.error.stack)
+  // }
   return responseObject;
 }
 
