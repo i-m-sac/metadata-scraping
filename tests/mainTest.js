@@ -13,7 +13,8 @@ describe('Is server running check', () => {
 });
 
 describe('Metadata scraping function check', () => {
-  it('should have property images', async () => {
+  it('should have property images', async function() {
+    this.timeout(15000);
     return testAPIService.metadataTest().should.eventually.have.property('images').to.have.lengthOf(1);
   });
 });
