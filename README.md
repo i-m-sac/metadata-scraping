@@ -1,6 +1,6 @@
 metadata-scraping
 
-## A NodeJS scraper to extract the OpenGraph parameters.
+## A NodeJS scraper to extract the OpenGraph parameters form the given URL.
 
 
 #### **Usage**
