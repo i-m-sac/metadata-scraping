@@ -5,7 +5,8 @@ module.exports = {
       INTERNAL_SERVER_ERROR: "Internal Server Error",
       FORBIDDEN: "Access denied",
       GATEWAY_TIMEOUT: "Gateway Timeout",
-      BAD_REQUEST: "Bad Request"
+      BAD_REQUEST: "Bad Request",
+      URL_MISSING: 'URL param missing in request'
     },
     SUCCESS: {
       DATA_POPULATED: "Data populated successfully",

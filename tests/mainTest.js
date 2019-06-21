@@ -18,8 +18,8 @@ describe('Metadata scraping function check', () => {
   });
 });
 
-describe('Metadata scraping function check', () => {
-  it('should have property images', async function() {
+describe('OGTags present check', () => {
+  it('should have all OG tags', async function() {
     this.timeout(15000);
     return testAPIService.allOGPropsPresent().should.eventually.be.true;
   });

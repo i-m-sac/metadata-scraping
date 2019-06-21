@@ -53,6 +53,19 @@ class Helper{
       error: err
     }
   }
+
+  /**
+   * get internal server error message from
+   * @param err {String}
+   * @return {Object}
+   */
+  getBadRequestErrorObj(err) {
+    return {
+      message: constants.MESSAGES.ERROR.BAD_REQUEST,
+      status: constants.RESPONSE_STATUS.BAD_REQUEST,
+      error: err
+    }
+  }
 }
 
 module.exports = new Helper();
